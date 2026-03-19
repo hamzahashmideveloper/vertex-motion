@@ -1,366 +1,2682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vertex Motion</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vertex Motion - Premium animation and motion graphics studio crafting cinematic explainer videos, stock-based storytelling, and whiteboard animations.">
+  <meta name="keywords" content="animation, motion graphics, explainer videos, whiteboard animation, stock footage, video production, creative studio">
+  <meta name="author" content="Vertex Motion">
+  <meta name="robots" content="index, follow">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vertex-motion.com/">
+  <meta property="og:title" content="Vertex Motion - Premium Animation Studio">
+  <meta property="og:description" content="Crafting cinematic explainer videos, stock-based storytelling, and whiteboard animations designed to elevate brands.">
+  <meta property="og:image" content="https://vertex-motion.com/og-image.jpg">
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://vertex-motion.com/">
+  <meta name="twitter:title" content="Vertex Motion - Premium Animation Studio">
+  <meta name="twitter:description" content="Crafting cinematic explainer videos, stock-based storytelling, and whiteboard animations designed to elevate brands.">
+  <meta name="twitter:image" content="https://vertex-motion.com/twitter-image.jpg">
+
+  <title>Vertex Motion | Premium Animation & Motion Graphics Studio</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="smalllogo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Structured Data - JSON-LD for Business Info -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Vertex Motion",
+    "description": "Premium animation and motion graphics studio",
+    "url": "https://vertex-motion.com",
+    "logo": "https://vertex-motion.com/smalllogo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+92-310-5463925",
+      "contactType": "customer service",
+      "email": "contact@vertex-motion.com"
+    },
+    "sameAs": [
+      "https://youtube.com/@vertexmotion"
+    ],
+    "serviceType": ["Animation Production", "Motion Graphics", "Explainer Videos", "Whiteboard Animation"]
+  }
+  </script>
+
+  <style>
+    /* ==================== RESET & BASE STYLES ==================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-purple: #6b21a8;
+      --secondary-purple: #a855f7;
+      --light-purple: #c4b5fd;
+      --dark-bg: #0a0a0f;
+      --medium-bg: #1a1a2e;
+      --text-white: #ffffff;
+      --text-muted: #a1a1aa;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, var(--dark-bg) 0%, var(--medium-bg) 100%);
+      color: var(--text-white);
+      overflow-x: hidden;
+      line-height: 1.7;
+      cursor: default;
+    }
+
+    /* ==================== LOADING ANIMATION OVERLAY ==================== */
+    .loader-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loader-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-logo {
+      height: 60px;
+    }
+
+    .loader-text {
+      margin-top: 20px;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* ==================== SCROLL PROGRESS INDICATOR ==================== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+      z-index: 10001;
+      transition: width 0.1s linear;
+    }
+
+    /* ==================== BACK TO TOP BUTTON ==================== */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 45px;
+      height: 45px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: var(--transition-smooth);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--glass-border);
+      transform: translateY(-3px);
+    }
+
+    /* ==================== CONTAINER ==================== */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 30px;
+    }
+
+    /* ==================== HEADER & NAVIGATION ==================== */
+    .site-header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: var(--transition-smooth);
+    }
+
+    .site-header.scrolled {
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+    }
+
+    .logo {
+      height: 38px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      transition: all 0.4s ease;
+    }
+
+    .logo:hover {
+      transform: rotate(5deg) scale(1.08);
+      filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.6));
+    }
+
+    .logo:hover::before {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: rotate(-5deg);
+    }
+
+    @keyframes logo-bounce {
+      0%, 100% { transform: rotate(5deg) scale(1.08) translateY(0); }
+      50% { transform: rotate(5deg) scale(1.08) translateY(-3px); }
+    }
+
+    .logo:hover {
+      animation: logo-bounce 0.6s ease-in-out;
+    }
+
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .main-nav a {
+      position: relative;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--text-muted);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 8px 16px;
+      display: inline-block;
+    }
+
+    .main-nav a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(139, 92, 246, 0.1));
+      border-radius: 20px;
+      opacity: 0;
+      transform: scaleX(0.8);
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple), var(--light-purple));
+      border-radius: 2px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+    }
+
+    .main-nav a:hover {
+      color: var(--text-white);
+      letter-spacing: 0.3px;
+      text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+      transform: scale(1.05);
+    }
+
+    .main-nav a:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .main-nav a:hover::after {
+      width: calc(100% - 32px);
+    }
+
+    /* Active state for navigation */
+    .main-nav a.active {
+      color: var(--text-white);
+    }
+
+    .main-nav a.active::after {
+      width: calc(100% - 32px);
+    }
+
+    .main-nav a.active::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--secondary-purple);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+      opacity: 1;
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(168, 85, 247, 0.1);
+      transform: scale(1.1);
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background: white;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center;
+    }
+
+    .menu-toggle:hover span {
+      background: linear-gradient(90deg, var(--secondary-purple), var(--light-purple));
+      transform: scaleX(1.2);
+      height: 3px;
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+      background: var(--light-purple);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+      background: var(--light-purple);
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0;
+    }
+
+    /* Subtle Background Mesh Gradient */
+    .hero-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(107, 33, 168, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(196, 181, 253, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: hero-fade-in 1s ease-out;
+    }
+
+    @keyframes hero-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-logo-img {
+      height: 100px;
+      margin-bottom: 30px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .hero-logo-img::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
+
+    .hero-logo-img:hover {
+      transform: scale(1.03) rotate(3deg);
+      filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8));
+    }
+
+    .hero-logo-img:hover::before {
+      opacity: 1;
+      animation: logo-glow-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes logo-glow-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.1); opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 10vw, 90px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      animation: slide-up 1s ease-out 0.2s both;
+    }
+
+    @keyframes slide-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 3vw, 20px);
+      margin-top: 25px;
+      color: var(--text-muted);
+      font-weight: 400;
+      animation: slide-up 1s ease-out 0.4s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 50px;
+      flex-wrap: wrap;
+      animation: slide-up 1s ease-out 0.6s both;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 16px 36px;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      color: white;
+      transition: var(--transition-smooth);
+      background: var(--glass-bg);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0;
+    }
+
+    /* Shine effect for hero buttons */
+    .hero-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: left 0.5s ease;
+      z-index: 1;
+    }
+
+    .hero-btn:hover::before {
+      left: 100%;
+    }
+
+    .hero-btn:hover {
+      background: var(--glass-border);
+      transform: translateY(-4px) scale(1.03);
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+    }
+
+    .hero-btn.primary {
+      background: var(--secondary-purple);
+      border-color: var(--secondary-purple);
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    }
+
+    /* Gradient animation for primary button */
+    .hero-btn.primary {
+      background-size: 200% 200%;
+      background-image: linear-gradient(135deg, var(--secondary-purple) 0%, var(--primary-purple) 50%, var(--secondary-purple) 100%);
+      animation: gradient-shift 3s ease infinite, subtle-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes subtle-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4); }
+      50% { box-shadow: 0 4px 30px rgba(168, 85, 247, 0.6); }
+    }
+
+    .hero-btn.primary:hover {
+      background: var(--primary-purple);
+      border-color: var(--primary-purple);
+      transform: translateY(-4px) scale(1.03);
+      letter-spacing: 0.5px;
+      box-shadow: 0 12px 35px rgba(168, 85, 247, 0.5);
+    }
+
+    /* Reduce effects on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .hero-btn:hover {
+        transform: translateY(-2px) scale(1.01);
+      }
+      .hero-btn.primary:hover {
+        transform: translateY(-2px) scale(1.01);
+      }
+    }
+
+    /* ==================== SECTION BASE STYLES ==================== */
+    section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 60px;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    /* Glass Card Base */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 50px;
+      transition: var(--transition-smooth);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+
+    /* Animation Trigger Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .slide-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .slide-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ==================== ABOUT SECTION ==================== */
+    .about {
+      position: relative;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-size: clamp(32px, 4vw, 44px);
+      margin-bottom: 30px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .about-text p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .stat-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      transition: var(--transition-smooth);
+      will-change: transform, box-shadow;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px) rotate(1deg) scale(1.02);
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow:
+        0 20px 40px rgba(168, 85, 247, 0.15),
+        0 0 0 1px rgba(168, 85, 247, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-card:hover .stat-number {
+      animation: stat-pulse 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--light-purple);
+    }
+
+    @keyframes stat-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--secondary-purple);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ==================== SERVICES SECTION ==================== */
+    .services {
+      position: relative;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .service-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 35px;
+      text-align: center;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      will-change: transform, box-shadow;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px) rotateX(3deg) rotateY(3deg) scale(1.02);
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow:
+        0 25px 50px rgba(168, 85, 247, 0.2),
+        0 0 0 1px rgba(168, 85, 247, 0.3),
+        0 10px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 2;
+    }
+
+    .service-card:hover::after {
+      width: 100%;
+    }
+
+    .service-card a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card:hover img {
+      transform: scale(1.06);
+      filter: brightness(1.1) saturate(1.1);
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+
+    /* Image shine effect for service cards */
+    .service-card a {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.6s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .service-card:hover a::before {
+      left: 100%;
+    }
+
+    .service-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .service-card:hover h3 {
+      color: var(--light-purple);
+    }
+
+    .service-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ==================== PORTFOLIO SECTION ==================== */
+    .portfolio {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-container {
+      margin-top: 50px;
+    }
+
+    .portfolio-scroll {
+      display: flex;
+      gap: 25px;
+      overflow-x: auto;
+      padding: 20px 0;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--glass-border) transparent;
+    }
+
+    .portfolio-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .portfolio-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .portfolio-scroll::-webkit-scrollbar-thumb {
+      background: var(--glass-border);
+      border-radius: 3px;
+    }
+
+    .portfolio-item {
+      flex: 0 0 380px;
+      scroll-snap-align: start;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      will-change: transform, box-shadow;
+    
+      position: relative;
 }
 
-body{
-  font-family:'Poppins', sans-serif;
-  background: radial-gradient(circle at top left,#2b004d,#12001f 60%);
-  color:white;
-  overflow-x:hidden;
-  cursor:none; /* Hide default cursor for custom glow */
-  scroll-behavior:smooth; /* Smooth scrolling */
-}
+    .portfolio-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 30px;
-}
+    .portfolio-item:hover {
+      transform: scale(1.02);
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 8px 30px rgba(168, 85, 247, 0.15);
+    }
 
-nav{
-  position:fixed;
-  width:100%;
-  top:0;
-  backdrop-filter:blur(18px);
-  background:rgba(255,255,255,0.05);
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  z-index:1000;
-}
+    .portfolio-item:hover::before {
+      opacity: 1;
+      animation: shine 0.6s ease;
+    }
 
-nav .container{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 0;
-}
+    @keyframes shine {
+      to { transform: rotate(45deg) translateY(50%); }
+    }
 
-nav img{
-  height:42px;
-  filter:drop-shadow(0 0 15px #c77dff);
-}
+    .portfolio-item a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
 
-nav a{
-  margin-left:25px;
-  text-decoration:none;
-  font-weight:600;
-  font-size:18px;
-  color:white;
-  transition:0.3s;
-}
+    .portfolio-thumb {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
 
-nav a:hover{
-  color:#e0aaff;
-}
+    .portfolio-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-/* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  flex-direction:column;
-  position:relative;
-}
+    .portfolio-item:hover .portfolio-thumb img {
+      transform: scale(1.1);
+      filter: brightness(1.15) contrast(1.05);
+    }
 
+    /* Vignette effect for portfolio */
+    .portfolio-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
 
-/* HERO LOGO */
-.hero-logo{
-  height:120px; /* adjust size as needed */
-  margin-bottom:20px;
-  filter:drop-shadow(0 0 25px #c77dff);
-}
-.hero::before{
-  content:"";
-  position:absolute;
-  width:600px;
-  height:600px;
-  background:radial-gradient(circle,#7b2cff55,transparent 70%);
-  top:-150px;
-  right:-150px;
-  filter:blur(120px);
-}
+    .portfolio-item:hover .portfolio-thumb::after {
+      opacity: 1;
+    }
 
-.hero h1{
-  font-size:90px;
-  font-weight:900;
-  line-height:1;
-  text-shadow:0 0 40px #c77dff;
-}
+    .portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(10, 10, 15, 0.95), transparent);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.hero p{
-  font-size:24px;
-  margin-top:25px;
-  opacity:0.9;
-}
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
 
-/* HERO BUTTONS - HORIZONTAL */
-.hero-buttons{
-  display:flex;
-  flex-direction:row;
-  gap:30px;
-  justify-content:center;
-  margin-top:40px;
-}
+    .portfolio-overlay span {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      color: var(--light-purple);
+    }
 
-.hero-btn{
-  display:inline-block;
-  padding:16px 40px;
-  border:2px solid #c77dff;
-  border-radius:50px;
-  text-decoration:none;
-  font-size:20px;
-  color:white;
-  transition:0.4s;
-  position:relative;
-  z-index:1;
-}
+    .portfolio-item:hover .portfolio-overlay span {
+      transform: translateY(0);
+    }
 
-.hero-btn:hover{
-  background:#7b2cff;
-  box-shadow:0 0 40px #c77dff;
-  transform:scale(1.05);
-}
+    .portfolio-info {
+      padding: 25px;
+    }
 
-/* SECTION BASE */
-section{
-  padding:140px 0;
-}
+    .portfolio-info h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
 
-/* GLASS CARD */
-.glass{
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:25px;
-  padding:60px;
-  box-shadow:0 0 40px rgba(199,125,255,0.2);
-  transition:0.6s ease;
-}
+    .portfolio-info p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
 
-/* ABOUT */
-.about h2{
-  font-size:50px;
-  margin-bottom:30px;
-}
+    /* ==================== CONTACT SECTION ==================== */
+    .contact {
+      position: relative;
+    }
 
-.about p{
-  font-size:22px;
-  line-height:1.8;
-}
+    .contact-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
 
-/* WORK SECTION */
-.work-item{
-  display:flex;
-  gap:60px;
-  align-items:center;
-  margin:100px 0;
-  flex-wrap:wrap;
-}
+    /* Contact Header */
+    .contact-header {
+      margin-bottom: 50px;
+    }
 
-.work-item.reverse{
-  flex-direction:row-reverse;
-}
+    .contact-card h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
 
-.work-text{
-  flex:1;
-}
+    .contact-card > p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
 
-.work-text h3{
-  font-size:40px;
-  margin-bottom:20px;
-}
+    /* Contact Info Grid */
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
 
-.work-text p{
-  font-size:20px;
-  line-height:1.7;
-}
+    .contact-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      transition: var(--transition-smooth);
+      will-change: transform, box-shadow, background;
+      position: relative;
+      overflow: hidden;
+    }
 
-.work-thumb{
-  flex:0 0 420px;
-}
+    .contact-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple), var(--light-purple));
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
 
-.work-thumb img{
-  width:100%;
-  border-radius:20px;
-  transition:0.4s;
-  border:1px solid rgba(255,255,255,0.2);
-  cursor:pointer;
-}
+    .contact-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(168, 85, 247, 0.5);
+      box-shadow:
+        0 20px 50px rgba(168, 85, 247, 0.2),
+        0 0 0 1px rgba(168, 85, 247, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+    }
 
-.work-thumb img:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 40px #c77dff;
-}
+    .contact-item:hover::before {
+      opacity: 1;
+      background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple), var(--light-purple));
+      background-size: 200% 100%;
+      animation: gradient-shift 2s ease infinite;
+    }
 
-/* CONTACT */
-.contact{
-  text-align:center;
-}
+    /* Icon Wrapper */
+    .contact-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, rgba(107, 33, 168, 0.2) 0%, rgba(168, 85, 247, 0.15) 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: var(--transition-smooth);
+    }
 
-.contact h2{
-  font-size:55px;
-  margin-bottom:30px;
-}
+    .contact-icon-wrapper svg {
+      color: var(--secondary-purple);
+      transition: var(--transition-smooth);
+    }
 
-.contact-info{
-  font-size:24px;
-  line-height:2.3;
-}
+    .contact-item:hover .contact-icon-wrapper {
+      transform: rotate(10deg) scale(1.1);
+      background: linear-gradient(135deg, rgba(107, 33, 168, 0.4) 0%, rgba(168, 85, 247, 0.3) 100%);
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+    }
 
-/* FOOTER */
-footer{
-  padding:40px 0;
-  text-align:center;
-  background:rgba(0,0,0,0.4);
-  font-size:18px;
-  opacity:0.8;
-}
+    .contact-item:hover .contact-icon-wrapper svg {
+      color: var(--light-purple);
+      transform: scale(1.1);
+    }
 
-/* MOUSE GLOW */
-#mouse-glow{
-  position:fixed;
-  top:0;
-  left:0;
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  pointer-events:none;
-  background:rgba(199,125,255,0.4);
-  box-shadow:0 0 30px #c77dff, 0 0 60px #c77dff;
-  transform:translate(-50%,-50%);
-  transition:width 0.2s, height 0.2s, background 0.2s, box-shadow 0.2s;
-  z-index:9999;
-}
+    .contact-item h3 {
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: var(--text-white);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
 
-</style>
+    .contact-link {
+      font-size: 14px;
+      color: var(--secondary-purple);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+    }
+
+    .contact-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--secondary-purple);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+
+    .contact-item:hover .contact-link {
+      color: var(--light-purple);
+    }
+
+    .contact-item:hover .contact-link::after {
+      width: 100%;
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .external-link-icon {
+      display: none;
+      color: var(--text-muted);
+      margin-top: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-item:hover .external-link-icon {
+      display: inline-block;
+      color: var(--secondary-purple);
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition-smooth);
+      padding: 0;
+    }
+
+    .contact-item:hover .copy-btn {
+      opacity: 1;
+    }
+
+    .copy-btn:hover {
+      background: linear-gradient(135deg, var(--secondary-purple), var(--light-purple));
+      border-color: var(--secondary-purple);
+      color: white;
+      transform: scale(1.15) rotate(90deg);
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    }
+
+    .copy-btn svg {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+
+    .copy-tooltip {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      background: var(--primary-purple);
+      color: white;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-smooth);
+      pointer-events: none;
+    }
+
+    .copy-btn.copied .copy-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Social Section */
+    .social-section {
+      margin-bottom: 40px;
+    }
+
+    .social-heading {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-white);
+    }
+
+    .social-subheading {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+        .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 52px;
+      height: 52px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: var(--text-white);
+      text-decoration: none;
+      position: relative;
+      overflow: visible;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 0 20px;
+      isolation: isolate;
+    }
+
+    /* Rotating gradient border effect */
+    .social-link::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 15px;
+      padding: 3px;
+      background: conic-gradient(from 0deg, transparent, var(--border-color, var(--secondary-purple)), transparent 50%, transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .social-link:hover::before {
+      opacity: 1;
+      animation: rotate-border 2s linear infinite;
+    }
+
+    @keyframes rotate-border {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Glow effect on hover */
+    .social-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: radial-gradient(circle at center, var(--glow-color, rgba(168, 85, 247, 0.3)), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .social-link:hover::after {
+      opacity: 1;
+      animation: glow-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Icon with enhanced animation */
+    .social-link svg {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Label with enhanced animation */
+    .social-label {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(10px) scale(0.9);
+      transform-origin: bottom center;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+
+    /* Label background pill */
+    .social-label::before {
+      content: '';
+      position: absolute;
+      inset: -4px -8px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+      z-index: -1;
+      backdrop-filter: blur(8px);
+    }
+
+    .social-link:hover .social-label::before {
+      transform: scaleX(1);
+    }
+
+    /* Base hover effects */
+    .social-link:hover {
+      transform: translateY(-5px) scale(1.08);
+      padding: 0 20px;
+      min-width: auto;
+      animation: wiggle 0.5s ease;
+    }
+
+    .social-link:hover .social-label {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.05);
+      text-shadow: 0 0 10px currentColor;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: translateY(-5px) scale(1.08) rotate(0deg); }
+      25% { transform: translateY(-5px) scale(1.08) rotate(-1deg); }
+      75% { transform: translateY(-5px) scale(1.08) rotate(1deg); }
+    }
+
+    /* ==================== PLATFORM-SPECIFIC EFFECTS ==================== */
+
+    /* YouTube */
+    .social-link.youtube {
+      --border-color: #ff0000;
+      --glow-color: rgba(255, 0, 0, 0.4);
+    }
+
+    .social-link.youtube:hover {
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.25) 0%, rgba(255, 0, 0, 0.15) 100%);
+      border-color: rgba(255, 0, 0, 0.6);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.35), 0 0 0 1px rgba(255, 0, 0, 0.2), inset 0 0 20px rgba(255, 0, 0, 0.1);
+    }
+
+    .social-link.youtube:hover svg {
+      filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
+      animation: youtube-bounce 0.6s ease;
+    }
+
+    @keyframes youtube-bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      25% { transform: translateY(-4px) scale(1.1); }
+      50% { transform: translateY(0) scale(1); }
+      75% { transform: translateY(-2px) scale(1.05); }
+    }
+
+    /* YouTube play button pulses */
+    .social-link.youtube:hover svg polygon {
+      animation: play-pulse 0.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes play-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Instagram */
+    .social-link.instagram {
+      --border-color: #e1306c;
+      --glow-color: rgba(225, 48, 108, 0.4);
+    }
+
+    .social-link.instagram:hover {
+      background: linear-gradient(135deg, rgba(225, 48, 108, 0.25) 0%, rgba(193, 53, 132, 0.15) 100%);
+      border-color: rgba(225, 48, 108, 0.6);
+      box-shadow: 0 8px 25px rgba(225, 48, 108, 0.35), 0 0 0 1px rgba(225, 48, 108, 0.2), inset 0 0 20px rgba(225, 48, 108, 0.1);
+    }
+
+    .social-link.instagram:hover svg {
+      filter: drop-shadow(0 0 10px rgba(225, 48, 108, 0.8));
+      animation: instagram-shutter 0.7s ease;
+    }
+
+    @keyframes instagram-shutter {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(0.8); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Instagram camera aperture effect */
+    .social-link.instagram:hover svg circle {
+      animation: aperture 1s ease-in-out infinite;
+    }
+
+    @keyframes aperture {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.6); opacity: 0.7; }
+    }
+
+    /* Twitter */
+    .social-link.twitter {
+      --border-color: #1da1f2;
+      --glow-color: rgba(29, 161, 242, 0.4);
+    }
+
+    .social-link.twitter:hover {
+      background: linear-gradient(135deg, rgba(29, 161, 242, 0.25) 0%, rgba(29, 161, 242, 0.15) 100%);
+      border-color: rgba(29, 161, 242, 0.6);
+      box-shadow: 0 8px 25px rgba(29, 161, 242, 0.35), 0 0 0 1px rgba(29, 161, 242, 0.2), inset 0 0 20px rgba(29, 161, 242, 0.1);
+    }
+
+    .social-link.twitter:hover svg {
+      filter: drop-shadow(0 0 10px rgba(29, 161, 242, 0.8));
+      animation: twitter-fly 0.6s ease;
+    }
+
+    @keyframes twitter-fly {
+      0% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-5px) rotate(-5deg); }
+      50% { transform: translateY(-2px) rotate(0deg); }
+      75% { transform: translateY(-5px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    /* Twitter bird bobbing */
+    .social-link.twitter:hover svg path {
+      animation: bird-bob 0.4s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes bird-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* LinkedIn */
+    .social-link.linkedin {
+      --border-color: #0a66c2;
+      --glow-color: rgba(10, 102, 194, 0.4);
+    }
+
+    .social-link.linkedin:hover {
+      background: linear-gradient(135deg, rgba(10, 102, 194, 0.25) 0%, rgba(10, 102, 194, 0.15) 100%);
+      border-color: rgba(10, 102, 194, 0.6);
+      box-shadow: 0 8px 25px rgba(10, 102, 194, 0.35), 0 0 0 1px rgba(10, 102, 194, 0.2), inset 0 0 20px rgba(10, 102, 194, 0.1);
+    }
+
+    .social-link.linkedin:hover svg {
+      filter: drop-shadow(0 0 10px rgba(10, 102, 194, 0.8));
+      animation: linkedin-connect 0.7s ease;
+    }
+
+    @keyframes linkedin-connect {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    /* LinkedIn "in" dots pulse separately */
+    .social-link.linkedin:hover svg rect {
+      animation: dot-pulse 1s ease-in-out infinite;
+      animation-delay: 0s;
+    }
+
+    .social-link.linkedin:hover svg path {
+      animation: dot-pulse 1s ease-in-out infinite;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes dot-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ==================== ORBITAL PARTICLES ==================== */
+
+    /* Add orbital dots that appear on hover */
+    .social-link .orbit {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 0 6px currentColor;
+    }
+
+    .social-link:hover .orbit:nth-child(1) {
+      animation: orbit-1 2s linear infinite;
+    }
+
+    .social-link:hover .orbit:nth-child(2) {
+      animation: orbit-2 2.5s linear infinite;
+      animation-delay: 0.5s;
+    }
+
+    .social-link:hover .orbit:nth-child(3) {
+      animation: orbit-3 1.8s linear infinite;
+      animation-delay: 1s;
+    }
+
+    @keyframes orbit-1 {
+      0% { transform: rotate(0deg) translateX(30px) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); opacity: 0; }
+    }
+
+    @keyframes orbit-2 {
+      0% { transform: rotate(120deg) translateX(35px) rotate(-120deg); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: rotate(480deg) translateX(35px) rotate(-480deg); opacity: 0; }
+    }
+
+    @keyframes orbit-3 {
+      0% { transform: rotate(240deg) translateX(28px) rotate(-240deg); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: rotate(600deg) translateX(28px) rotate(-600deg); opacity: 0; }
+    }
+
+    /* ==================== EXPANDING RING EFFECT ==================== */
+
+    .social-link .expanding-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid currentColor;
+      border-radius: 12px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .social-link:hover .expanding-ring {
+      animation: ring-expand 1.2s ease-out infinite;
+    }
+
+    @keyframes ring-expand {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    /* ==================== SPARKLE EFFECT ==================== */
+
+    .social-link .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 0 8px white;
+    }
+
+    .social-link:hover .sparkle:nth-child(5) {
+      animation: sparkle-1 1.5s ease-in-out infinite;
+    }
+
+    .social-link:hover .sparkle:nth-child(6) {
+      animation: sparkle-2 1.5s ease-in-out infinite;
+      animation-delay: 0.3s;
+    }
+
+    .social-link:hover .sparkle:nth-child(7) {
+      animation: sparkle-3 1.5s ease-in-out infinite;
+      animation-delay: 0.6s;
+    }
+
+    .social-link:hover .sparkle:nth-child(8) {
+      animation: sparkle-4 1.5s ease-in-out infinite;
+      animation-delay: 0.9s;
+    }
+
+    @keyframes sparkle-1 {
+      0%, 100% { transform: translate(0, 0) scale(0); opacity: 0; }
+      50% { transform: translate(-15px, -15px) scale(1); opacity: 1; }
+    }
+
+    @keyframes sparkle-2 {
+      0%, 100% { transform: translate(0, 0) scale(0); opacity: 0; }
+      50% { transform: translate(15px, -15px) scale(1); opacity: 1; }
+    }
+
+    @keyframes sparkle-3 {
+      0%, 100% { transform: translate(0, 0) scale(0); opacity: 0; }
+      50% { transform: translate(-15px, 15px) scale(1); opacity: 1; }
+    }
+
+    @keyframes sparkle-4 {
+      0%, 100% { transform: translate(0, 0) scale(0); opacity: 0; }
+      50% { transform: translate(15px, 15px) scale(1); opacity: 1; }
+    }
+
+    /* CTA Button */
+    .contact-cta {
+      margin-top: 40px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+      background-size: 200% 200%;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Glow effect that radiates outward */
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .cta-button:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-4px) scale(1.05);
+      background-position: 100% 50%;
+      box-shadow: 0 12px 40px rgba(168, 85, 247, 0.5);
+    }
+
+    .cta-button svg {
+      transition: var(--transition-smooth);
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-button:hover svg {
+      transform: translateX(6px);
+      animation: icon-bounce 0.6s ease;
+    }
+
+    @keyframes icon-bounce {
+      0%, 100% { transform: translateX(6px); }
+      50% { transform: translateX(8px); }
+    }
+
+    /* Text positioning above glow effect */
+    .cta-button span {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Reduce effects on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .cta-button:hover {
+        transform: translateY(-2px) scale(1.02);
+      }
+    }
+
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .contact-card {
+        padding: 40px 24px;
+      }
+
+      .contact-info-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .contact-item {
+        padding: 28px 20px;
+      }
+
+      .social-link {
+        min-width: 48px;
+        height: 48px;
+      }
+
+      .social-label {
+        display: none;
+      }
+
+      .cta-button {
+        font-size: 14px;
+        padding: 14px 28px;
+      }
+
+      /* Mobile optimizations for navigation effects */
+      .logo:hover {
+        transform: scale(1.05);
+        filter: none;
+      }
+
+      .main-nav a:hover {
+        letter-spacing: 0;
+        transform: none;
+      }
+
+      .footer-links a:hover {
+        transform: translateX(2px);
+      }
+    }
+
+    /* ==================== FOOTER ==================== */
+    .site-footer {
+      padding: 60px 0 30px;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      height: 40px;
+      margin-bottom: 20px;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .footer-heading {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      display: inline-block;
+      padding-left: 0;
+    }
+
+    .footer-links a::before {
+      content: '→';
+      position: absolute;
+      left: -20px;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--secondary-purple);
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple), var(--light-purple));
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 6px rgba(168, 85, 247, 0.4);
+    }
+
+    .footer-links a:hover {
+      color: var(--light-purple);
+      transform: translateX(3px);
+      text-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+    }
+
+    .footer-links a:hover::before {
+      opacity: 1;
+      left: 0;
+      transform: translateX(0) rotate(-45deg);
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      color: white;
+      font-size: 14px;
+      transition: var(--transition-smooth);
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--secondary-purple);
+    }
+
+    .newsletter-btn {
+      padding: 12px 22px;
+      background: var(--secondary-purple);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Fill animation from left */
+    .newsletter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+      transition: left 0.4s ease;
+      z-index: -1;
+    }
+
+    .newsletter-btn:hover::before {
+      left: 0;
+    }
+
+    .newsletter-btn:hover {
+      background: var(--primary-purple);
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+    }
+
+    /* Reduce effects on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .newsletter-btn:hover {
+        transform: scale(1.01);
+      }
+    }
+
+    .newsletter-btn:hover {
+      background: var(--primary-purple);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ==================== RESPONSIVE DESIGN ==================== */
+    @media (max-width: 992px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .portfolio-item {
+        flex: 0 0 320px;
+      }
+
+    .portfolio-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .main-nav {
+        position: fixed;
+        top: 78px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 30px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition-smooth);
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .main-nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .main-nav ul {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .main-nav a {
+        display: block;
+        padding: 12px 15px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-btn {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        padding: 40px 25px;
+      }
+
+      .contact-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-logo-img {
+        height: 70px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .glass-card {
+        padding: 30px 20px;
+      }
+
+      .portfolio-item {
+        flex: 0 0 280px;
+      }
+
+    .portfolio-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+      .site-header .container {
+        padding: 15px 20px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-<!-- MOUSE GLOW -->
-<div id="mouse-glow"></div>
-
-<nav>
-  <div class="container">
-    <img src="smalllogo.png">
-    <div>
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
+  <!-- ==================== LOADING ANIMATION OVERLAY ==================== -->
+  <div class="loader-overlay" id="loader" aria-hidden="true">
+    <div class="loader-content">
+      <img src="smalllogo.png" alt="Vertex Motion Logo" class="loader-logo">
+      <p class="loader-text">Loading Experience</p>
     </div>
   </div>
-</nav>
 
-<section class="hero">
-  <div class="container">
-    <h1>VERTEX<br>MOTION</h1>
-    <p>Motion. Story. Impact.</p>
-    <div class="hero-buttons">
-      <a href="#about" class="hero-btn">About Us</a>
-      <a href="#work" class="hero-btn">Our Work</a>
-      <a href="#contact" class="hero-btn">Contact Us</a>
-    </div>
-  </div>
-</section>
+  <!-- ==================== SCROLL PROGRESS INDICATOR ==================== -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-<section id="about" class="about">
-  <div class="container glass">
-    <h2>Creative Studio</h2>
-    <p>
-      Vertex Motion is a premium animation and motion graphics studio
-      crafting cinematic explainer videos, stock-based storytelling,
-      and whiteboard animations designed to elevate brands.
-    </p>
-  </div>
-</section>
-
-<section id="work" class="container">
-  
-  <div class="work-item glass">
-    <div class="work-text">
-      <h3>Explainer Videos</h3>
-      <p>High-impact storytelling that simplifies complex ideas into powerful visual experiences.</p>
-    </div>
-    <div class="work-thumb">
-      <a href="https://youtu.be/GjQMfZuIyMM" target="_blank">
-        <img src="explainer.jpg" alt="Explainer Video">
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="site-header" id="siteHeader" role="banner">
+    <div class="container">
+      <a href="#hero" class="logo-link" aria-label="Vertex Motion Home">
+        <img src="smalllogo.png" alt="Vertex Motion Logo" class="logo">
       </a>
+
+      <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-  </div>
+  </header>
 
-  <div class="work-item reverse glass">
-    <div class="work-text">
-      <h3>Stock Footage Videos</h3>
-      <p>Cinematic promotional visuals crafted using dynamic stock footage and motion graphics.</p>
+  <main role="main">
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="hero" aria-label="Hero section">
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <img src="smalllogo.png" alt="Vertex Motion" class="hero-logo-img">
+        <h1>VERTEX<br>MOTION</h1>
+        <p class="hero-subtitle">Motion. Story. Impact.</p>
+
+        <div class="hero-buttons">
+          <a href="#about" class="hero-btn primary">Discover More</a>
+          <a href="#services" class="hero-btn">Our Services</a>
+          <a href="#contact" class="hero-btn">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text fade-in" data-animate>
+            <h2 id="about-title">Creative Studio</h2>
+            <p>
+              Vertex Motion is a premium animation and motion graphics studio crafting cinematic explainer videos,
+              stock-based storytelling, and whiteboard animations designed to elevate brands. We transform complex
+              ideas into compelling visual narratives that captivate audiences and drive meaningful engagement.
+            </p>
+          </div>
+
+          <div class="about-stats slide-in-right" data-animate>
+            <div class="stat-card">
+              <div class="stat-number" data-count="150">0</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-count="50">0</div>
+              <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-count="5">0</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-count="100">0</div>
+              <div class="stat-label">Client Satisfaction %</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <h2 class="section-title fade-in" data-animate id="services-title">Our Services</h2>
+        <p class="section-subtitle fade-in" data-animate>
+          Premium animation solutions crafted to elevate your brand and engage your audience
+        </p>
+
+        <div class="services-grid">
+          <!-- Explainer Videos Card -->
+          <article class="service-card fade-in" data-animate data-delay="100">
+            <a href="https://youtu.be/GjQMfZuIyMM" target="_blank" rel="noopener noreferrer" aria-label="View Explainer Videos showcase">
+              <img src="explainer.jpg" alt="Explainer Video Production">
+              <h3>Explainer Videos</h3>
+              <p>Engaging animated stories that simplify complex ideas and drive action. Perfect for startups, products, and services.</p>
+            </a>
+          </article>
+
+          <!-- Stock Footage Card -->
+          <article class="service-card fade-in" data-animate data-delay="200">
+            <a href="https://youtu.be/s5or9MtMTXg" target="_blank" rel="noopener noreferrer" aria-label="View Stock Footage Videos showcase">
+              <img src="stock.jpg" alt="Stock Footage Video Production">
+              <h3>Stock Footage Videos</h3>
+              <p>High-quality cinematic visuals crafted with dynamic stock clips. Professional storytelling at scale.</p>
+            </a>
+          </article>
+
+          <!-- Whiteboard Videos Card -->
+          <article class="service-card fade-in" data-animate data-delay="300">
+            <a href="https://youtu.be/gig2lRP8ITg" target="_blank" rel="noopener noreferrer" aria-label="View Whiteboard Videos showcase">
+              <img src="whiteboard.jpg" alt="Whiteboard Animation Production">
+              <h3>Whiteboard Videos</h3>
+              <p>Clear animated explanations structured to educate and convert. Ideal for training, educational content, and B2B marketing.</p>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO SECTION ==================== -->
+    <section class="portfolio" id="portfolio" aria-labelledby="portfolio-title">
+      <div class="container portfolio-container">
+        <h2 class="section-title fade-in" data-animate id="portfolio-title">Featured Work</h2>
+        <p class="section-subtitle fade-in" data-animate>
+          Explore our latest projects and creative achievements
+        </p>
+
+        <div class="portfolio-scroll">
+          <!-- Portfolio Item 1 -->
+          <div class="portfolio-item fade-in" data-animate>
+            <a href="https://youtu.be/GjQMfZuIyMM" target="_blank" rel="noopener noreferrer" aria-label="View Tech Startup Explainer project">
+              <div class="portfolio-thumb">
+                <img src="explainer.jpg" alt="Tech Startup Explainer">
+                <div class="portfolio-overlay">
+                  <span>Watch Video</span>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h3>Tech Startup Explainer</h3>
+                <p>Animated explainer for innovative SaaS platform</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Portfolio Item 2 -->
+          <div class="portfolio-item fade-in" data-animate data-delay="100">
+            <a href="https://youtu.be/s5or9MtMTXg" target="_blank" rel="noopener noreferrer" aria-label="View Corporate Story project">
+              <div class="portfolio-thumb">
+                <img src="stock.jpg" alt="Corporate Story">
+                <div class="portfolio-overlay">
+                  <span>Watch Video</span>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h3>Corporate Story</h3>
+                <p>Cinematic stock footage brand narrative</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Portfolio Item 3 -->
+          <div class="portfolio-item fade-in" data-animate data-delay="200">
+            <a href="https://youtu.be/gig2lRP8ITg" target="_blank" rel="noopener noreferrer" aria-label="View Educational Series project">
+              <div class="portfolio-thumb">
+                <img src="whiteboard.jpg" alt="Educational Series">
+                <div class="portfolio-overlay">
+                  <span>Watch Video</span>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h3>Educational Series</h3>
+                <p>Whiteboard animation for online course platform</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Portfolio Item 4 -->
+          <div class="portfolio-item fade-in" data-animate data-delay="300">
+            <a href="https://youtu.be/GjQMfZuIyMM" target="_blank" rel="noopener noreferrer" aria-label="View Product Launch project">
+              <div class="portfolio-thumb">
+                <img src="explainer.jpg" alt="Product Launch Video">
+                <div class="portfolio-overlay">
+                  <span>Watch Video</span>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <h3>Product Launch</h3>
+                <p>Animated promotional video for new product</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-card fade-in" data-animate>
+          <!-- Section Header -->
+          <div class="contact-header">
+            <h2 id="contact-title">Let's Create Together</h2>
+            <p>Ready to bring your vision to life? Get in touch and let's start the conversation.</p>
+          </div>
+
+          <!-- Contact Info Grid -->
+          <div class="contact-info-grid">
+            <!-- Email Card -->
+            <div class="contact-item" data-contact="email">
+              <div class="contact-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <h3>Email Us</h3>
+              <a href="mailto:contact@vertex-motion.com" class="contact-link">contact@vertex-motion.com</a>
+              <button class="copy-btn" data-copy="contact@vertex-motion.com" aria-label="Copy email address" title="Copy email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="copy-tooltip">Copied!</span>
+              </button>
+            </div>
+
+            <!-- Phone Card -->
+            <div class="contact-item" data-contact="phone">
+              <div class="contact-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <h3>Call Us</h3>
+              <a href="tel:+923105463925" class="contact-link">+92-310-5463925</a>
+              <button class="copy-btn" data-copy="+923105463925" aria-label="Copy phone number" title="Copy phone">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="copy-tooltip">Copied!</span>
+              </button>
+            </div>
+
+            <!-- Website Card -->
+            <div class="contact-item" data-contact="website">
+              <div class="contact-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <h3>Visit Website</h3>
+              <a href="https://vertex-motion.com" target="_blank" rel="noopener noreferrer" class="contact-link">vertex-motion.com</a>
+              <svg class="external-link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </div>
+
+          </div>
+
+          <!-- Social Section -->
+          <div class="social-section">
+            <h3 class="social-heading">Follow Our Creative Journey</h3>
+            <p class="social-subheading">Join 50+ brands who trust us with their vision</p>
+
+            <div class="social-links">
+              <a href="https://youtube.com/@vertexmotion" target="_blank" rel="noopener noreferrer" class="social-link youtube" aria-label="Visit our YouTube channel">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                </svg>
+                <span class="social-label">YouTube</span>
+              </a>
+
+              <a href="https://instagram.com/vertexmotion" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Visit our Instagram page">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span class="social-label">Instagram</span>
+              </a>
+
+              <a href="https://twitter.com/vertexmotion" target="_blank" rel="noopener noreferrer" class="social-link twitter" aria-label="Visit our Twitter page">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                </svg>
+                <span class="social-label">Twitter</span>
+              </a>
+
+              <a href="https://linkedin.com/company/vertexmotion" target="_blank" rel="noopener noreferrer" class="social-link linkedin" aria-label="Visit our LinkedIn page">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                <span class="social-label">LinkedIn</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="contact-cta">
+            <a href="mailto:contact@vertex-motion.com" class="cta-button">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Start Your Project Today
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <!-- Brand Column -->
+        <div>
+          <img src="smalllogo.png" alt="Vertex Motion Logo" class="footer-logo">
+          <p class="footer-text">
+            Premium animation and motion graphics studio crafting visual stories that elevate brands and inspire audiences worldwide.
+          </p>
+        </div>
+
+        <!-- Quick Links Column -->
+        <div>
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services Column -->
+        <div>
+          <h3 class="footer-heading">Services</h3>
+          <ul class="footer-links">
+            <li><a href="#services">Explainer Videos</a></li>
+            <li><a href="#services">Stock Footage</a></li>
+            <li><a href="#services">Whiteboard Animation</a></li>
+            <li><a href="#services">Motion Graphics</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter Column -->
+        <div>
+          <h3 class="footer-heading">Stay Updated</h3>
+          <p class="footer-text">Subscribe for latest updates and insights.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Your email" class="newsletter-input" aria-label="Email address">
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Vertex Motion. All rights reserved. Crafted with precision.</p>
+      </div>
     </div>
-    <div class="work-thumb">
-      <a href="https://youtu.be/s5or9MtMTXg" target="_blank">
-        <img src="stock.jpg" alt="Stock Video">
-      </a>
-    </div>
-  </div>
+  </footer>
 
-  <div class="work-item glass">
-    <div class="work-text">
-      <h3>Whiteboard Videos</h3>
-      <p>Clean and engaging animated explanations structured to educate and convert.</p>
-    </div>
-    <div class="work-thumb">
-      <a href="https://youtu.be/gig2lRP8ITg" target="_blank">
-        <img src="whiteboard.jpg" alt="Whiteboard Video">
-      </a>
-    </div>
-  </div>
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // ==================== LOADING ANIMATION ====================
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 800);
+    });
 
-</section>
+    // ==================== SCROLL PROGRESS INDICATOR ====================
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.getElementById('scrollProgress');
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (scrollTop / scrollHeight) * 100;
+      scrollProgress.style.width = scrolled + '%';
+    });
 
-<section id="contact" class="contact">
-  <div class="container glass">
-    <h2>Contact Us</h2>
-    <div class="contact-info">
-      Email: contact@vertex-motion.com <br>
-      Phone: +92-310-5463925 <br>
-      Website: vertex-motion.com
-    </div>
-  </div>
-</section>
+    // ==================== HEADER BACKGROUND ON SCROLL ====================
+    const siteHeader = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        siteHeader.classList.add('scrolled');
+      } else {
+        siteHeader.classList.remove('scrolled');
+      }
+    });
 
-<footer>
-  © 2026 Vertex Motion — All Rights Reserved
-</footer>
+    // ==================== MOBILE MENU TOGGLE ====================
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-<script>
-// SMOOTH SCROLLING
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-  anchor.addEventListener('click', function(e){
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if(target){
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-    }
-  });
-});
+    menuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', mainNav.classList.contains('active'));
+    });
 
-// MOUSE GLOW
-const glow = document.getElementById('mouse-glow');
-document.addEventListener('mousemove', e=>{
-  glow.style.top = e.clientY + 'px';
-  glow.style.left = e.clientX + 'px';
-});
-</script>
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
 
+    // ==================== BACK TO TOP BUTTON ====================
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.innerHTML = '↑';
+    backToTopBtn.setAttribute('aria-label', 'Back to top');
+    document.body.appendChild(backToTopBtn);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTopBtn.classList.add('visible');
+      } else {
+
+    // ==================== SPECIAL EFFECTS ====================
+
+    // 3D Tilt Effect for Cards
+    const tiltCards = document.querySelectorAll('.service-card, .portfolio-item, .stat-card');
+
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      });
+    });
+
+    // Magnetic Effect for Buttons
+    const magneticButtons = document.querySelectorAll('.hero-btn, .cta-button, .newsletter-btn');
+
+    magneticButtons.forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        button.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translate(0, 0)';
+      });
+    });
+
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ==================== SCROLL ANIMATIONS ====================
+    const animatedElements = document.querySelectorAll('[data-animate]');
+
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animationObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    animatedElements.forEach(element => {
+      animationObserver.observe(element);
+    });
+
+    // ==================== COUNTER ANIMATION ====================
+    const counterElements = document.querySelectorAll('[data-count]');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = parseInt(entry.target.dataset.count);
+          const duration = 2000;
+          const increment = target / (duration / 16);
+          let current = 0;
+
+          const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+              entry.target.textContent = Math.floor(current);
+              requestAnimationFrame(updateCounter);
+            } else {
+              entry.target.textContent = target;
+            }
+          };
+
+          updateCounter();
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counterElements.forEach(element => {
+      counterObserver.observe(element);
+    });
+
+    // ==================== SMOOTH SCROLL FOR ANCHOR LINKS ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const targetElement = document.querySelector(href);
+          if (targetElement) {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // ==================== COPY TO CLIPBOARD FUNCTIONALITY ====================
+    const copyButtons = document.querySelectorAll('.copy-btn');
+
+    copyButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const textToCopy = button.dataset.copy;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+
+          // Show copied state
+          button.classList.add('copied');
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            button.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
